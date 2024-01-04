@@ -106,7 +106,9 @@ let StartFunc = ({ inFilesArray }) => {
     };
 
     let FuncCopyData = () => {
-        fs.cpSync(`${CommonFromFolderName}`, ToConfigJson.JsonPath);
+        // fs.cpSync(`${CommonFromFolderName}`, ToConfigJson.JsonPath);
+
+        fs.cpSync(`${CommonFromFolderName}`, ToConfigJson.JsonPath, { recursive: true });
     };
 
     LocalFilesArray.forEach(element => {
@@ -120,6 +122,6 @@ let StartFunc = ({ inFilesArray }) => {
     });
 };
 
-// StartFunc({ inFilesArray: CommonRoutes });
+StartFunc({ inFilesArray: CommonRoutes });
 
-fs.cpSync(`${CommonFromFolderName}`, ToConfigJson.JsonPath, { recursive: true });
+// fs.cpSync(`${CommonFromFolderName}`, ToConfigJson.JsonPath, { recursive: true });
