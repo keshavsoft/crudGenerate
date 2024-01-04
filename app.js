@@ -1,79 +1,48 @@
-import fs from 'fs';
+import { StartFunc as StartFuncPortListen } from "./PortListen.js";
 
-let CommonRoute = ["customers", "tickets"];
-let CommonFrom = "src";
-let CommonTo = "bin";
+import { router as routerImageUpload } from "./src/routes/{{sample}}Route.js";
 
-fs.mkdirSync(`${CommonTo}/routes`);
-fs.mkdirSync(`${CommonTo}/middlewares`);
-fs.mkdirSync(`${CommonTo}/controllers`);
-fs.mkdirSync(`${CommonTo}/repos`);
-fs.mkdirSync(`${CommonTo}/dals`);
+import express from 'express';
+import http from 'http';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// fs.mkdirSync("middlewares");
-// fs.mkdirSync("controllers");
-// fs.mkdirSync("repos");
-// fs.mkdirSync("dal");
+const app = express();
+const server = http.createServer(app);
 
-let FuncForRoutes = ({ inElement }) => {
-    let LocalElement = inElement;
-    let LocalTypeName = "Route";
-    let LocalFrom = CommonFrom;
-    let LocalTo = CommonTo;
+var port = normalizePort(process.env.PORT || '7016');
 
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
+app.use(cookieParser());
 
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
-};
+app.use(express.json({ limit: '100mb' }));
 
-let FuncForMiddlewares = ({ inElement }) => {
-    let LocalElement = inElement;
-    let LocalTypeName = "Middleware";
-    let LocalFrom = CommonFrom;
-    let LocalTo = CommonTo;
+app.use('/', express.static(path.join(path.resolve(), 'public')))
 
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
-
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
-};
-
-let FuncForControllers = ({ inElement }) => {
-    let LocalElement = inElement;
-    let LocalTypeName = "Controller";
-    let LocalFrom = CommonFrom;
-    let LocalTo = CommonTo;
-
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
-
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
-};
-
-let FuncForRepos = ({ inElement }) => {
-    let LocalElement = inElement;
-    let LocalTypeName = "Repo";
-    let LocalFrom = CommonFrom;
-    let LocalTo = CommonTo;
-
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
-
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
-};
-
-let FuncForDals = ({ inElement }) => {
-    let LocalElement = inElement;
-    let LocalTypeName = "Dal";
-    let LocalFrom = CommonFrom;
-    let LocalTo = CommonTo;
-
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
-
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
-};
-
-CommonRoute.forEach(element => {
-    FuncForRoutes({ inElement: element });
-    FuncForMiddlewares({ inElement: element });
-    FuncForControllers({ inElement: element });
-    FuncForRepos({ inElement: element });
-    FuncForDals({ inElement: element });
+app.get('/', (req, res) => {
+    res.json("kkhhhhhhh")
 });
+
+app.get('/k1', (req, res) => {
+    // StartFuncKLowDb().then();
+    res.json("k1");
+});
+
+app.use('/test', routerImageUpload);
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        return val;
+    }
+
+    if (port >= 0) {
+        return port;
+    }
+
+    return false;
+};
+
+server.listen(port, StartFuncPortListen);
