@@ -1,8 +1,15 @@
 import { GetFunc as GetFuncRepo } from '../repos/{{sample}}Repo.js';
 
-let GetFunc = async (req, res) => {
-    let LocalFromRepo = await GetFuncRepo();
+let GetFunc = (req, res) => {
+    let LocalFromRepo = GetFuncRepo();
     res.json(LocalFromRepo);
 };
 
-export { GetFunc };
+let PostFunc = async (req, res) => {
+    let LocalKeys = req.body['{{KSKeyName}}'];
+
+    let LocalFromRepo = await GetFuncRepo({ LocalKey1: LocalKeys });
+    res.json(LocalFromRepo);
+};
+
+export { GetFunc, PostFunc };
