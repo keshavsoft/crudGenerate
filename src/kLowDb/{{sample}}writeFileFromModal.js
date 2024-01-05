@@ -1,12 +1,14 @@
 import { LowSync } from 'lowdb'
 import { JSONFileSync } from 'lowdb/node'
 import Configjson from '../Config.json' assert { type: 'json' };
+import ModalDataJson from '../dataModals/{{sample}}Data.json' assert { type: 'json' };
 
 let StartFunc = (inDataToInsert) => {
-    let LocalDataToInsert = {};
-    {{KSAssignKeys}}
+    let LocalinDataToInsert = {
+        ...ModalDataJson,
+        ...inDataToInsert
+    };
 
-    let LocalinDataToInsert = LocalDataToInsert;
     let LocalReturnData = { KTF: false, JSONFolderPath: "", CreatedLog: {} };
 
     LocalReturnData.KTF = false;
