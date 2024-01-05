@@ -10,10 +10,6 @@ let StartFunc = ({ inElement, inColumnsArray, inFrom, inTo }) => {
 
     fs.mkdirSync(`${LocalTo}/${LocalTypeName}/${LocalElement}`);
 
-    // let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName}/${LocalSampleString}readFile.js`);
-
-    // fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}/readFile.js`, LocalFromRoute.toString().replaceAll(LocalSampleString, LocalElement));
-
     LocalFuncForreadFile({ inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom, inTypeName: LocalTypeName, inSampleString: LocalSampleString });
     LocalFuncForWriteFile({
         inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
@@ -67,14 +63,6 @@ let LocalDeclareVariables = ({ inColumnsArray }) => {
     });
 
     return LocalNewArray.join("\r\n\t");
-};
-
-let LocalFuncForInputs = ({ inColumnsArray }) => {
-    let LocalNewArray = inColumnsArray.map(element => {
-        return ` in${element}: LocalKey${element} `
-    });
-
-    return LocalNewArray.toString();
 };
 
 export { StartFunc };

@@ -3,12 +3,16 @@ import path from 'path';
 
 import { StartFunc as StartFuncBaseDirs } from './BaseDirs/EntryFile.js';
 
+import { StartFunc as StartFuncForRoutesFile } from './ForRoutesFile/EntryFile.js';
+
 import { StartFunc as StartFuncForRoutes } from './ForRoutes.js';
 import { StartFunc as StartFuncForMiddlewares } from './ForMiddlewares.js';
 import { StartFunc as StartFuncForControllers } from './ForControllers.js';
 import { StartFunc as StartFuncForRepos } from './ForRepos.js';
 import { StartFunc as StartFuncForDals } from './ForDals.js';
 import { StartFunc as StartFuncForkLowDb } from './ForkLowDb.js';
+import { StartFunc as StartFuncForRestClients } from './ForRestClients.js';
+
 import { StartFunc as StartFuncCopyDatas } from './CopyDatas/EntryFile.js';
 
 let CommonFromFolderName = "FromData";
@@ -34,6 +38,11 @@ let StartFunc = ({ inFilesArray }) => {
     let CommonTo = "bin";
 
     StartFuncBaseDirs({ inTo: CommonTo });
+
+    StartFuncForRoutesFile({
+        inEndPointsArray: LocalFilesArray.map(element => element.FileName),
+        inFrom: CommonFrom, inTo: CommonTo
+    });
 
     LocalFilesArray.forEach(element => {
         StartFuncForRoutes({
@@ -62,6 +71,11 @@ let StartFunc = ({ inFilesArray }) => {
         });
 
         StartFuncForkLowDb({
+            inElement: element.FileName, inColumnsArray: element.Columns,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
+
+        StartFuncForRestClients({
             inElement: element.FileName, inColumnsArray: element.Columns,
             inFrom: CommonFrom, inTo: CommonTo
         });

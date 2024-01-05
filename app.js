@@ -1,7 +1,10 @@
 import { StartFunc as StartFuncPortListen } from "./PortListen.js";
 
-import { router as routerSample } from "./src/routes/{{sample}}Route.js";
-import { router as routerbin } from "./bin/routes/customersRoute.js";
+// import { router as routerSample } from "./src/routes/{{sample}}Route.js";
+
+// import { router as routerFromSrc } from "./src/routes.js";
+
+import { router as routerbin } from "./bin/routes.js";
 
 import express from 'express';
 import http from 'http';
@@ -27,11 +30,11 @@ app.get('/', (req, res) => {
 
 app.get('/k1', (req, res) => {
     // StartFuncKLowDb().then();
-    res.json("k1");
+    res.json("k1"); ``
 });
 
-app.use('/test', routerSample);
-app.use('/bin', routerbin);
+// app.use('/test', routerFromSrc);
+app.use('/api', routerbin);
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
