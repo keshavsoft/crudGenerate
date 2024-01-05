@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { StartFunc as StartFuncForControllers } from './ForControllers.js';
+import { StartFunc as StartFuncForRoutes } from './ForRoutes.js';
 
 let CommonFromFolderName = "FromData";
 let CommonRoutes = [];
@@ -26,9 +27,14 @@ let StartFunc = ({ inFilesArray }) => {
     let CommonFrom = "src";
     let CommonTo = "bin";
 
+    fs.mkdirSync(`${CommonTo}/routes`);
     fs.mkdirSync(`${CommonTo}/controllers`);
 
     LocalFilesArray.forEach(element => {
+        StartFuncForRoutes({
+            inElement: element.FileName,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
         StartFuncForControllers({
             inElement: element.FileName, inColumnsArray: element.Columns,
             inFrom: CommonFrom, inTo: CommonTo
