@@ -7,7 +7,7 @@ let StartFunc = ({ inElement, inColumnsArray, inTo }) => {
     let LocalColumnsArray = inColumnsArray;
     let LocalObjectToInsert = LocalArrayToObject({ inColumnsArray: LocalColumnsArray });
 
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}.json`, JSON.stringify(LocalObjectToInsert));
+    fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}data.json`, JSON.stringify(LocalObjectToInsert));
 };
 
 let LocalArrayToObject = ({ inColumnsArray }) => {

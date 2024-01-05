@@ -1,4 +1,8 @@
+###Get for as is data
 GET http://localhost:7016/api/{{sample}}
+
+###Get for data transformed to Modal data
+GET http://localhost:7016/api/{{sample}}/FromModal
 
 ###
 
@@ -8,6 +12,15 @@ content-type: application/json
 ###
 
 POST http://localhost:7016/api/{{sample}}
+content-type: application/json
+
+{
+
+}
+
+###
+
+POST http://localhost:7016/api/{{sample}}/FromModal
 content-type: application/json
 
 {

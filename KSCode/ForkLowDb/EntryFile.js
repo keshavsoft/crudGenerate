@@ -1,5 +1,9 @@
 import fs from 'fs';
 
+import { StartFunc as StartFuncReadFileFromModal } from './readFileFromModal.js';
+import { StartFunc as StartFuncWriteFile } from './writeFile.js';
+import { StartFunc as StartFuncwriteFileFromModal } from './writeFileFromModal.js';
+
 let StartFunc = ({ inElement, inColumnsArray, inFrom, inTo }) => {
     let LocalElement = inElement;
     let LocalTypeName = "kLowDb";
@@ -11,8 +15,22 @@ let StartFunc = ({ inElement, inColumnsArray, inFrom, inTo }) => {
     fs.mkdirSync(`${LocalTo}/${LocalTypeName}/${LocalElement}`);
 
     LocalFuncForreadFile({ inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom, inTypeName: LocalTypeName, inSampleString: LocalSampleString });
-    LocalFuncForWriteFile({
-        inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
+    // LocalFuncForWriteFile({
+    //     inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
+    //     inTypeName: LocalTypeName, inSampleString: LocalSampleString, inColumnsArray: LocalColumnsArray
+    // });
+    StartFuncReadFileFromModal({
+        inElement: LocalElement, inFrom: LocalFrom, inTo: LocalTo,
+        inTypeName: LocalTypeName, inSampleString: LocalSampleString, inColumnsArray: LocalColumnsArray
+    });
+
+    StartFuncWriteFile({
+        inElement: LocalElement, inFrom: LocalFrom, inTo: LocalTo,
+        inTypeName: LocalTypeName, inSampleString: LocalSampleString, inColumnsArray: LocalColumnsArray
+    });
+
+    StartFuncwriteFileFromModal({
+        inElement: LocalElement, inFrom: LocalFrom, inTo: LocalTo,
         inTypeName: LocalTypeName, inSampleString: LocalSampleString, inColumnsArray: LocalColumnsArray
     });
 
@@ -47,7 +65,6 @@ let LocalFuncForWriteFile = ({ inElement, inFrom, inTo, inTypeName, inSampleStri
 
     let LocalForVariables = "{{KSAssignKeys}}"
     let LocalForVariablesNew = LocalDeclareVariables({ inColumnsArray: LocalColumnsArray });
-    // {{KSAssignKeys}}
     let LocalNewData = LocalToFileData.replaceAll(LocalForVariables, LocalForVariablesNew);
 
     fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}/${LocalFileName}`, LocalNewData);

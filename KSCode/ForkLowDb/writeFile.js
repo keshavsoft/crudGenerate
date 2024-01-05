@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 let StartFunc = ({ inElement, inFrom, inTo, inTypeName, inSampleString, inColumnsArray }) => {
-    let LocalFileName = "writeFileFromModal.js";
+    let LocalFileName = "writeFile.js";
     let LocalElement = inElement;
     let LocalTypeName = inTypeName;
     let LocalFrom = inFrom;

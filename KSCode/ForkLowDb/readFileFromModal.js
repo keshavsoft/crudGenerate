@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 let StartFunc = ({ inElement, inFrom, inTo, inTypeName, inSampleString, inColumnsArray }) => {
-    let LocalFileName = "writeFileFromModal.js";
+    let LocalFileName = "readFileFromModal.js";
     let LocalElement = inElement;
     let LocalTypeName = inTypeName;
     let LocalFrom = inFrom;
@@ -12,11 +12,11 @@ let StartFunc = ({ inElement, inFrom, inTo, inTypeName, inSampleString, inColumn
     let LocalFileData = fs.readFileSync(`${LocalFrom}/${LocalTypeName}/${LocalSampleString}${LocalFileName}`);
     let LocalToFileData = LocalFileData.toString().replaceAll(LocalSampleString, LocalElement);
 
-    let LocalForVariables = "{{KSAssignKeys}}"
-    let LocalForVariablesNew = LocalDeclareVariables({ inColumnsArray: LocalColumnsArray });
-    let LocalNewData = LocalToFileData.replaceAll(LocalForVariables, LocalForVariablesNew);
+    // let LocalForVariables = "{{KSAssignKeys}}";
+    // let LocalForVariablesNew = LocalDeclareVariables({ inColumnsArray: LocalColumnsArray });
+    // let LocalNewData = LocalToFileData.replaceAll(LocalForVariables, LocalForVariablesNew);
 
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}/${LocalFileName}`, LocalNewData);
+    fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}/${LocalFileName}`, LocalToFileData);
 };
 
 let LocalDeclareVariables = ({ inColumnsArray }) => {

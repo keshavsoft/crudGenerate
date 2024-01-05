@@ -1,4 +1,4 @@
-import ModalDataJson from '../dataModals/{{sample}}Data.json' assert { type: 'json' };
+import ModalDataJson from '../dataModals/{{sample}}data.json' assert { type: 'json' };
 
 let GetFunc = (req, res, next) => {
     let LocalRequestBody = req.body;

@@ -18,8 +18,8 @@ let StartFunc = ({ inElement, inFrom, inTo }) => {
 let LocalFuncChangeFileData = ({ inElement, inFileData }) => {
     let LocalFileData = inFileData;
 
-    let LocalForVariables = "{{sample}}Data.json";
-    let LocalForVariablesNew = `${inElement}.json`;
+    let LocalForVariables = "{{sample}}";
+    let LocalForVariablesNew = `${inElement}`;
 
     let LocalNewData = LocalFileData.replaceAll(LocalForVariables, LocalForVariablesNew);
 

@@ -11,9 +11,11 @@ import { StartFunc as StartFuncForMiddlewares } from './ForMiddlewares.js';
 import { StartFunc as StartFuncForControllers } from './ForControllers.js';
 import { StartFunc as StartFuncForRepos } from './ForRepos.js';
 import { StartFunc as StartFuncForDals } from './ForDals.js';
-import { StartFunc as StartFuncForkLowDb } from './ForkLowDb.js';
-import { StartFunc as StartFuncForRestClients } from './ForRestClients.js';
+// import { StartFunc as StartFuncForkLowDb } from './ForkLowDb.js';
+// import { StartFunc as StartFuncForRestClients } from './ForRestClients.js';
 
+import { StartFunc as StartFuncForkLowDb } from './ForkLowDb/EntryFile.js';
+import { StartFunc as StartFuncForRestClients } from './ForRestClients/EntryFile.js';
 import { StartFunc as StartFuncCopyDatas } from './CopyDatas/EntryFile.js';
 
 let CommonFromFolderName = "FromData";
