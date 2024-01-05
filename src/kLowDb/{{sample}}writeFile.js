@@ -3,7 +3,10 @@ import { JSONFileSync } from 'lowdb/node'
 import Configjson from '../Config.json' assert { type: 'json' };
 
 let StartFunc = (inDataToInsert) => {
-    let LocalinDataToInsert = inDataToInsert;
+    let LocalDataToInsert = {};
+    {{KSAssignKeys}}
+
+    let LocalinDataToInsert = LocalDataToInsert;
     let LocalReturnData = { KTF: false, JSONFolderPath: "", CreatedLog: {} };
 
     LocalReturnData.KTF = false;
