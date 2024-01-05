@@ -11,6 +11,14 @@ let GetFromModalFunc = () => {
     return StartFuncReadFileFromModal();
 };
 
+let GetFromModalUuidFunc = () => {
+    return StartFuncReadFileFromModal();
+};
+
+let GetFromModalUuidAndTSFunc = () => {
+    return StartFuncReadFileFromModal();
+};
+
 let PostFunc = ({ LocalKey1: LocalKeys }) => {
     return StartFuncwriteFile({ LocalKey1: LocalKeys });
 };
@@ -19,4 +27,7 @@ let PostFromModalFunc = ({ LocalKey1: LocalKeys }) => {
     return StartFuncWriteFileFromModal({ LocalKey1: LocalKeys });
 };
 
-export { GetFunc, PostFunc, PostFromModalFunc, GetFromModalFunc };
+export {
+    GetFunc, PostFunc, PostFromModalFunc, GetFromModalFunc,
+    GetFromModalUuidFunc, GetFromModalUuidAndTSFunc
+};
