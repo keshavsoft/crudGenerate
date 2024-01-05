@@ -1,0 +1,15 @@
+GET http://localhost:7016/api/{{sample}}
+
+###
+
+POST http://localhost:7016/api/{{sample}}/BodyCheck
+content-type: application/json
+
+###
+
+POST http://localhost:7016/api/{{sample}}
+content-type: application/json
+
+{
+
+}

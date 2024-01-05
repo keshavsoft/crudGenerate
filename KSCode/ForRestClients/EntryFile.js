@@ -1,24 +1,29 @@
 import fs from 'fs';
+import { StartFunc as StartFuncForAllMethods } from './ForAllMethods.js';
 
 let StartFunc = ({ inElement, inColumnsArray, inFrom, inTo }) => {
     let LocalElement = inElement;
     let LocalTypeName = "restClients";
-    let LocalFrom = inFrom;
     let LocalTo = inTo;
-    let LocalSampleString = "{{sample}}";
-    let LocalColumnsArray = inColumnsArray;
+    let LocalFrom = inFrom;
+    let LocalFileName = "AllMethods.http";
 
     fs.mkdirSync(`${LocalTo}/${LocalTypeName}/${LocalElement}`);
 
-    LocalFuncForGetHttp({
-        inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
-        inTypeName: LocalTypeName
-    });
+    let LocalFileData = fs.readFileSync(`${LocalFrom}/${LocalTypeName}/${LocalFileName}`);
 
-    LocalFuncForAllMethodsHttp({
-        inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
-        inTypeName: LocalTypeName
-    });
+    let LocalFromAllMethods = StartFuncForAllMethods({ inElement, LocalElement, inFileData: LocalFileData.toString(), inColumnsArray: [] });
+
+    fs.writeFileSync(`${LocalTo}/${LocalTypeName}/${LocalElement}/${LocalFileName}`, LocalFromAllMethods);
+    // LocalFuncForGetHttp({
+    //     inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
+    //     inTypeName: LocalTypeName
+    // });
+
+    // LocalFuncForAllMethodsHttp({
+    //     inElement: LocalElement, inTo: LocalTo, inFrom: LocalFrom,
+    //     inTypeName: LocalTypeName
+    // });
 };
 
 let LocalFuncForGetHttp = ({ inElement, inFrom, inTo, inTypeName }) => {

@@ -3,6 +3,7 @@ import fs from 'fs';
 let StartFunc = ({ inTo }) => {
     let LocalTo = inTo;
 
+    fs.mkdirSync(`${LocalTo}/dataModals`);
     fs.mkdirSync(`${LocalTo}/routes`);
     fs.mkdirSync(`${LocalTo}/middlewares`);
     fs.mkdirSync(`${LocalTo}/controllers`);

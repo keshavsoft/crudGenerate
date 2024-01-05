@@ -6,10 +6,24 @@ let StartFunc = ({ inElement, inFrom, inTo }) => {
     let LocalFrom = inFrom;
     let LocalTo = inTo;
 
-    let LocalFromRoute = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
+    let LocalFileData = fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
 
-    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalFromRoute.toString().replaceAll("{{sample}}", LocalElement));
+    let LocalNewData = LocalFuncChangeFileData({ inElement: LocalElement, inFileData: LocalFileData.toString() });
 
+    // fs.readFileSync(`${LocalFrom}/${LocalTypeName.toLowerCase()}s/{{sample}}${LocalTypeName}.js`);
+
+    fs.writeFileSync(`${LocalTo}/${LocalTypeName.toLowerCase()}s/${LocalElement}${LocalTypeName}.js`, LocalNewData);
+};
+
+let LocalFuncChangeFileData = ({ inElement, inFileData }) => {
+    let LocalFileData = inFileData;
+
+    let LocalForVariables = "{{sample}}Data.json";
+    let LocalForVariablesNew = `${inElement}.json`;
+
+    let LocalNewData = LocalFileData.replaceAll(LocalForVariables, LocalForVariablesNew);
+
+    return LocalNewData;
 };
 
 export { StartFunc };

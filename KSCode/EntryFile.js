@@ -5,6 +5,7 @@ import { StartFunc as StartFuncBaseDirs } from './BaseDirs/EntryFile.js';
 
 import { StartFunc as StartFuncForRoutesFile } from './ForRoutesFile/EntryFile.js';
 
+import { StartFunc as StartFuncFordataModals } from './FordataModals.js';
 import { StartFunc as StartFuncForRoutes } from './ForRoutes.js';
 import { StartFunc as StartFuncForMiddlewares } from './ForMiddlewares.js';
 import { StartFunc as StartFuncForControllers } from './ForControllers.js';
@@ -45,6 +46,11 @@ let StartFunc = ({ inFilesArray }) => {
     });
 
     LocalFilesArray.forEach(element => {
+        StartFuncFordataModals({
+            inElement: element.FileName,
+            inColumnsArray: element.Columns, inTo: CommonTo
+        });
+
         StartFuncForRoutes({
             inElement: element.FileName,
             inFrom: CommonFrom, inTo: CommonTo
