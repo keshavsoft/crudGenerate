@@ -1,7 +1,7 @@
 import { StartFunc as StartFuncPortListen } from "./PortListen.js";
 
 import { router as routerSample } from "./src/routes/{{sample}}Route.js";
-import { router as routerbin } from "./bin/routes/customersRoute.js";
+// import { router as routerbin } from "./bin/routes/customersRoute.js";
 
 import express from 'express';
 import http from 'http';
@@ -31,7 +31,7 @@ app.get('/k1', (req, res) => {
 });
 
 app.use('/test', routerSample);
-app.use('/bin', routerbin);
+// app.use('/bin', routerbin);
 
 function normalizePort(val) {
     var port = parseInt(val, 10);
