@@ -1,0 +1,7 @@
+POST   http://localhost:7016/bin
+content-type: application/json
+
+ {
+        "CustomerName": "Test",
+        "CustomerMobile": 1000
+    }

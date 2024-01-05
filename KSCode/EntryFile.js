@@ -1,8 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 
-import { StartFunc as StartFuncForControllers } from './ForControllers.js';
+import { StartFunc as StartFuncBaseDirs } from './BaseDirs/EntryFile.js';
+
 import { StartFunc as StartFuncForRoutes } from './ForRoutes.js';
+import { StartFunc as StartFuncForMiddlewares } from './ForMiddlewares.js';
+import { StartFunc as StartFuncForControllers } from './ForControllers.js';
+import { StartFunc as StartFuncForRepos } from './ForRepos.js';
+import { StartFunc as StartFuncForDals } from './ForDals.js';
+import { StartFunc as StartFuncForkLowDb } from './ForkLowDb.js';
+import { StartFunc as StartFuncCopyDatas } from './CopyDatas/EntryFile.js';
 
 let CommonFromFolderName = "FromData";
 let CommonRoutes = [];
@@ -10,7 +17,6 @@ let CommonRoutes = [];
 let CommonFiles = fs.readdirSync(CommonFromFolderName);
 
 CommonFiles.forEach(function (file, index) {
-    // CommonRoutes.push(path.parse(file).name);
     let LoopInsideObject = {};
     LoopInsideObject.FileName = path.parse(file).name;
     let LoopInsideFileData = fs.readFileSync(`${CommonFromFolderName}/${file}`);
@@ -27,17 +33,41 @@ let StartFunc = ({ inFilesArray }) => {
     let CommonFrom = "src";
     let CommonTo = "bin";
 
-    fs.mkdirSync(`${CommonTo}/routes`);
-    fs.mkdirSync(`${CommonTo}/controllers`);
+    StartFuncBaseDirs({ inTo: CommonTo });
 
     LocalFilesArray.forEach(element => {
         StartFuncForRoutes({
             inElement: element.FileName,
             inFrom: CommonFrom, inTo: CommonTo
         });
+
+        StartFuncForMiddlewares({
+            inElement: element.FileName,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
+
         StartFuncForControllers({
             inElement: element.FileName, inColumnsArray: element.Columns,
             inFrom: CommonFrom, inTo: CommonTo
+        });
+
+        StartFuncForRepos({
+            inElement: element.FileName, inColumnsArray: element.Columns,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
+
+        StartFuncForDals({
+            inElement: element.FileName, inColumnsArray: element.Columns,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
+
+        StartFuncForkLowDb({
+            inElement: element.FileName, inColumnsArray: element.Columns,
+            inFrom: CommonFrom, inTo: CommonTo
+        });
+
+        StartFuncCopyDatas({
+            inFromFolderName: CommonFromFolderName
         });
     });
 };
