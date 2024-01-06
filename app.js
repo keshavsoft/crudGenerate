@@ -4,6 +4,8 @@ import { StartFunc as StartFuncPortListen } from "./PortListen.js";
 
 // import { router as routerFromSrc } from "./src/routes.js";
 
+import { router as routersrcByPath } from "./srcByPath/routes.js";
+
 import { router as routerbin } from "./bin/routes.js";
 
 import express from 'express';
@@ -34,6 +36,8 @@ app.get('/k1', (req, res) => {
 });
 
 // app.use('/test', routerFromSrc);
+app.use('/srcByPath', routersrcByPath);
+
 app.use('/api', routerbin);
 
 function normalizePort(val) {
